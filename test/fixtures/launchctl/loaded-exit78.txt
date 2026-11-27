@@ -1,0 +1,63 @@
+gui/501/com.example.job = {
+	active count = 0
+	path = /Users/alex/Library/LaunchAgents/com.example.job.plist
+	type = LaunchAgent
+	state = not running
+
+	program = /Users/alex/.local/bin/wt-cleanup-merged.sh
+	arguments = {
+		/Users/alex/.local/bin/wt-cleanup-merged.sh
+	}
+
+	stdout path = /Users/alex/Library/Logs/wt-cleanup.log
+	stderr path = /Users/alex/Library/Logs/wt-cleanup.log
+	inherited environment = {
+		SSH_AUTH_SOCK => /var/run/com.apple.launchd.DOjPYU8aBO/Listeners
+	}
+
+	default environment = {
+		PATH => /usr/bin:/bin:/usr/sbin:/sbin
+	}
+
+	environment = {
+		OSLogRateLimit => 64
+		PATH => /Users/alex/.local/share/mise/shims:/Users/alex/.bun/bin:/Users/alex/.local/bin:/Applications/Orca.app/Contents/Resources/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+		XPC_SERVICE_NAME => com.example.job
+	}
+
+	domain = gui/501 [100004]
+	asid = 100004
+	minimum runtime = 10
+	exit timeout = 5
+	runs = 2
+	last exit code = 78: Function not implemented
+
+	resource coalition = {
+		ID = 1174
+		type = resource
+		state = active
+		active count = 1
+		name = com.example.job
+	}
+
+	jetsam coalition = {
+		ID = 1175
+		type = jetsam
+		state = active
+		active count = 1
+		name = com.example.job
+	}
+
+	spawn type = background (5)
+	jetsam priority = 40
+	jetsam memory limit (active) = (unlimited)
+	jetsam memory limit (inactive) = (unlimited)
+	jetsamproperties category = daemon
+	jetsam thread limit = 32
+	cpumon = default
+	run interval = 1800 seconds
+	job state = exited
+	sanitizer flags = 0x0
+
+	properties = runatload | low priority i/o | inferred program | managed LWCR
+}

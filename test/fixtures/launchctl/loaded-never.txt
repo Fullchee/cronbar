@@ -1,0 +1,74 @@
+gui/501/com.example.job = {
+	active count = 0
+	path = /Users/alex/Library/LaunchAgents/com.example.job.plist
+	type = LaunchAgent
+	state = not running
+
+	program = /usr/bin/env
+	arguments = {
+		/usr/bin/env
+		node
+		/Users/alex/personal-projects/journal/scripts/vault-diff.ts
+		/Users/alex/personal-projects/work-log
+		--nightly
+	}
+
+	stdout path = /Users/alex/Library/Logs/journal-vault-diff/launchd.log
+	stderr path = /Users/alex/Library/Logs/journal-vault-diff/launchd.log
+	inherited environment = {
+		SSH_AUTH_SOCK => /var/run/com.apple.launchd.DOjPYU8aBO/Listeners
+	}
+
+	default environment = {
+		PATH => /usr/bin:/bin:/usr/sbin:/sbin
+	}
+
+	environment = {
+		OSLogRateLimit => 64
+		PATH => /Applications/Orca.app/Contents/Resources/bin:/Users/alex/.local/share/mise/installs/node/26/bin:/Users/alex/.local/share/mise/installs/rumdl/0.3.2:/Users/alex/.local/share/mise/shims:/Users/alex/.local/share/vite-plus/bin:/Users/alex/.opencode/bin:/Users/alex/.bun/bin:/Users/alex/.local/bin:/Users/alex/bin:/usr/local/sbin:/usr/local/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/Users/alex/.atuin/bin:/Users/alex/.local/share/pnpm/bin:/Users/alex/.cargo/bin:/Users/alex/Library/Android/sdk/cmdline-tools/latest/bin:/Users/alex/Library/Android/sdk/emulator:/Users/alex/Library/Android/sdk/platform-tools:/Users/alex/.maestro/bin://opt/homebrew/opt/fzf/bin:/Users/alex/.volta/bin:/Users/alex/.asdf/shims:/Users/alex/.fnm/aliases/default/bin:/Users/alex/Library/pnpm:/Users/alex/.yarn/bin:/nix/var/nix/profiles/default/bin:/Users/alex/.nix-profile/bin:/Users/alex/.vite-plus/bin:/Users/alex/.grok/bin:/Users/alex/.local/share/vite-plus/fallback-bin
+		XPC_SERVICE_NAME => com.example.job
+	}
+
+	domain = gui/501 [100004]
+	asid = 100004
+	minimum runtime = 10
+	exit timeout = 5
+	runs = 0
+	last exit code = (never exited)
+
+	event triggers = {
+		com.example.job.268435471 => {
+			keepalive = 0
+			service = com.example.job
+			stream = com.apple.launchd.calendarinterval
+			monitor = com.apple.UserEventAgent-Aqua
+			descriptor = {
+				"Minute" => 30
+				"Hour" => 22
+			}
+		}
+	}
+
+	event channels = {
+		"com.apple.launchd.calendarinterval" = {
+			port = 0x0
+			active = 0
+			managed = 1
+			reset = 0
+			hide = 0
+			watching = 1
+		}
+	}
+
+	spawn type = daemon (3)
+	jetsam priority = 40
+	jetsam memory limit (active) = (unlimited)
+	jetsam memory limit (inactive) = (unlimited)
+	jetsamproperties category = daemon
+	jetsam thread limit = 32
+	cpumon = default
+	job state = uninitialized
+	sanitizer flags = 0x0
+
+	properties = inferred program | needs LWCR update | managed LWCR
+}
