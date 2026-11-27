@@ -21,4 +21,4 @@ jobs:
           gh release create "$GITHUB_REF_NAME" dist/Cronbar.zip \
             --title "$GITHUB_REF_NAME" \
             --generate-notes \
-            --notes "Download **Cronbar.zip**, unzip it and move **Cronbar.app** to Applications. The app is not notarized: on first launch, right-click it and choose **Open**."
+            --notes "Download **Cronbar.zip**, unzip it and move **Cronbar.app** to Applications. The app isn't notarized, so macOS blocks the first launch. See [Install](https://github.com/Fullchee/cronbar#install) to allow it."
